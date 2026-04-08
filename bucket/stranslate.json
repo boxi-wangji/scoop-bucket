@@ -1,0 +1,10 @@
+  {
+    "version": "2.0.6",
+    "description": "A free and open-source translation software",
+    "homepage": "https://github.com/ZGGSONG/STranslate",
+    "license": "MIT",
+    "url": "https://github.com/ZGGSONG/STranslate/releases/download/2.0.6/STranslate.exe",
+    "hash": "",
+    "bin": "STranslate.exe",
+    "shortcuts": [["STranslate.exe", "STranslate"]]
+  }
