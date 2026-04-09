@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "description": "App packaged and hosted by boxi-wangji",
+  "homepage": "https://github.com/boxi-wangji/YourApp-Package",
+  "license": "Freeware",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/boxi-wangji/YourApp-Package/releases/download/v1.0.0/YourApp-1.0.0-win64.zip",
+      "hash": "sha256-here"
+    }
+  },
+  "extract_dir": "YourApp",
+  "bin": "YourApp.exe",
+  "shortcuts": [
+    [
+      "YourApp.exe",
+      "YourApp"
+    ]
+  ],
+  "checkver": {
+    "github": "https://github.com/boxi-wangji/YourApp-Package"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/boxi-wangji/YourApp-Package/releases/download/v$version/YourApp-$version-win64.zip"
+      }
+    }
+  }
+}
