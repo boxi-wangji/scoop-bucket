@@ -24,6 +24,12 @@ scoop install boxi/quickclipboard
 通过 GitHub Actions 工作流 `update.yml` 自动更新版本号、下载链接和哈希值。
 由 ScoopManager 桌面应用触发。
 
+## 发布仓库
+
+自定义安装包统一发布到：
+
+- `https://github.com/boxi-wangji/apps`
+
 ## 包装模式
 
 如果你想像 `gendloopBucket` 那样使用“包装仓库 + 第三方桶”的模式：

@@ -1,11 +1,11 @@
 {
   "version": "0.2.0",
   "description": "QuickClipboard packaged release hosted by boxi-wangji",
-  "homepage": "https://github.com/boxi-wangji/QuickClipboard-Package",
+  "homepage": "https://github.com/boxi-wangji/apps",
   "license": "Freeware",
   "architecture": {
     "64bit": {
-      "url": "https://github.com/boxi-wangji/QuickClipboard-Package/releases/download/v0.2.0/QuickClipboard-0.2.0-win64.zip",
+      "url": "https://github.com/boxi-wangji/apps/releases/download/quickclipboard-v0.2.0/QuickClipboard-0.2.0-win64.zip",
       "hash": "d2a785804112476e47c8c1c1f300a99088c1477cc93a598bf6c8dfe79fe029dc"
     }
   },
@@ -35,12 +35,13 @@
     ]
   },
   "checkver": {
-    "github": "https://github.com/boxi-wangji/QuickClipboard-Package"
+    "url": "https://github.com/boxi-wangji/apps/releases",
+    "regex": "quickclipboard-v([\\d.]+)"
   },
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://github.com/boxi-wangji/QuickClipboard-Package/releases/download/v$version/QuickClipboard-$version-win64.zip"
+        "url": "https://github.com/boxi-wangji/apps/releases/download/quickclipboard-v$version/QuickClipboard-$version-win64.zip"
       }
     }
   }
