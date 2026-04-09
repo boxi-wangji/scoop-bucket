@@ -6,7 +6,7 @@ Personal Scoop bucket managed by [ScoopManager](https://github.com/boxi-wangji/S
 
 ```powershell
 scoop bucket add boxi https://github.com/boxi-wangji/scoop-bucket.git
-scoop install boxi/bandizip-professional
+scoop install boxi/bandizip
 scoop install boxi/stranslate
 scoop install boxi/quickclipboard
 ```
@@ -15,7 +15,7 @@ scoop install boxi/quickclipboard
 
 | 名称 | 版本 | 说明 |
 |------|------|------|
-| bandizip-professional | 7.40 | Bandizip Professional 压缩软件（需单独购买授权） |
+| bandizip | 7.40 | Bandizip 自定义打包版（由 boxi-wangji 发布） |
 | quickclipboard | 0.2.0 | QuickClipboard GitHub Release 包装版 |
 | stranslate | 2.0.6 | 免费开源翻译软件 |
 

@@ -1,0 +1,37 @@
+{
+  "version": "7.40",
+  "description": "Bandizip custom packaged release hosted by boxi-wangji",
+  "homepage": "https://github.com/boxi-wangji/Bandizip-Package",
+  "license": {
+    "identifier": "Commercial",
+    "url": "https://en.bandisoft.com/bandizip/eula/"
+  },
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/boxi-wangji/Bandizip-Package/releases/download/v7.40/Bandizip-7.40-win64.zip",
+      "hash": "f36aba19147d0fc2162bfd67e13ae9c1faed7a10bc9fb830e00b6909ee8f35d7"
+    }
+  },
+  "bin": "Bandizip.exe",
+  "shortcuts": [
+    [
+      "Bandizip.exe",
+      "Bandizip"
+    ]
+  ],
+  "persist": "Bandizip.ini",
+  "notes": [
+    "这是 boxi-wangji 维护的自定义打包版本，不直接使用官方站点下载链接。",
+    "安装后如需 Professional 权限，请使用你自己的授权完成注册。"
+  ],
+  "checkver": {
+    "github": "https://github.com/boxi-wangji/Bandizip-Package"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/boxi-wangji/Bandizip-Package/releases/download/v$version/Bandizip-$version-win64.zip"
+      }
+    }
+  }
+}
