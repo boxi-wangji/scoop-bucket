@@ -16,6 +16,24 @@
       "QuickClipboard"
     ]
   ],
+  "installer": {
+    "script": [
+      "$desktop = [Environment]::GetFolderPath('Desktop')",
+      "$shortcutPath = Join-Path $desktop 'QuickClipboard.lnk'",
+      "$shell = New-Object -ComObject WScript.Shell",
+      "$shortcut = $shell.CreateShortcut($shortcutPath)",
+      "$shortcut.TargetPath = \"$dir\\QuickClipboard.exe\"",
+      "$shortcut.WorkingDirectory = \"$dir\"",
+      "$shortcut.IconLocation = \"$dir\\QuickClipboard.exe,0\"",
+      "$shortcut.Save()"
+    ]
+  },
+  "uninstaller": {
+    "script": [
+      "$shortcutPath = Join-Path ([Environment]::GetFolderPath('Desktop')) 'QuickClipboard.lnk'",
+      "if (Test-Path $shortcutPath) { Remove-Item $shortcutPath -Force }"
+    ]
+  },
   "checkver": {
     "github": "https://github.com/boxi-wangji/QuickClipboard-Package"
   },
