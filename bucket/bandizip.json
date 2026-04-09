@@ -1,0 +1,31 @@
+{
+  "version": "7.40",
+  "url": "https://github.com/boxi-wangji/Bandizip-Package/releases/download/v7.40/bandizip-7.40.exe",
+  "hash": "0687e83f07f84619b772d7828bdde6e604f4c8d76acf3143bd0fb020febb9e25",
+  "license": "MIT",
+  "bin": "Bandizip.exe",
+  "shortcuts": [
+    [
+      "Bandizip.exe",
+      "Bandizip"
+    ]
+  ],
+  "installer": {
+    "script": [
+      "$installer = Join-Path $dir 'bandizip-7.40.exe'",
+      "$installerArgs = '/S'",
+      "$installerArgs = $installerArgs.Replace('{dir}', $dir)",
+      "Start-Process -FilePath $installer -ArgumentList $installerArgs -Wait",
+      "Remove-Item $installer -Force"
+    ]
+  },
+  "notes": [
+    "此清单按静默安装器模式生成，请确认安装器参数支持静默安装，并可用 {dir} 代表 Scoop 安装目录。"
+  ],
+  "checkver": {
+    "github": "https://github.com/boxi-wangji/Bandizip-Package"
+  },
+  "autoupdate": {
+    "url": "https://github.com/boxi-wangji/Bandizip-Package/releases/download/v$version/bandizip-$version.exe"
+  }
+}
