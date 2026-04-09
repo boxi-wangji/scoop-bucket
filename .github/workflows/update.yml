@@ -17,7 +17,7 @@
         contents: write
 
       steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v5
 
         - name: Update manifest version
           run: |
@@ -41,5 +41,5 @@
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add bucket/
             git diff --staged --quiet && echo "No changes" && exit 0
-            git commit -m "chore: update ${{ github.event.inputs.app }} to v${{ github.event.inputs.version }}"
+            git commit -m "chore: 更新 ${{ github.event.inputs.app }} 清单版本到 v${{ github.event.inputs.version }}"
             git push
