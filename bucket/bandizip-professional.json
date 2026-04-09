@@ -1,3 +1,44 @@
 {
-  "version": "7.40"
+  "version": "7.40",
+  "description": "Bandizip Professional edition installer (requires separate license activation)",
+  "homepage": "https://www.bandisoft.com/bandizip/",
+  "license": {
+    "identifier": "Commercial",
+    "url": "https://en.bandisoft.com/bandizip/eula/"
+  },
+  "url": "https://bandisoft.app/bandizip/BANDIZIP-PORTABLE.ZIP",
+  "hash": "d3fe38f9fd66951c9a7922c8f4cfaca2bac39d1c18511d9477bc89d4628b09f0",
+  "architecture": {
+    "64bit": {
+      "pre_install": "Rename-Item \"$dir\\Bandizip.x64.exe\" 'Bandizip.exe'"
+    },
+    "32bit": {
+      "pre_install": "Rename-Item \"$dir\\Bandizip.x86.exe\" 'Bandizip.exe'"
+    }
+  },
+  "installer": {
+    "script": [
+      "Get-ChildItem \"$dir\\Bandizip.x*.exe\" | Remove-Item",
+      "if (!(Test-Path \"$persist_dir\\Bandizip.ini\")) { New-Item \"$dir\\Bandizip.ini\" | Out-Null }"
+    ]
+  },
+  "bin": "Bandizip.exe",
+  "shortcuts": [
+    [
+      "Bandizip.exe",
+      "Bandizip Professional"
+    ]
+  ],
+  "persist": "Bandizip.ini",
+  "notes": [
+    "安装后需使用单独购买的 Bandizip Professional License 完成注册。",
+    "Professional Edition 首次注册需要联网，注册成功后使用时不再需要持续联网。"
+  ],
+  "checkver": {
+    "url": "https://en.bandisoft.com/bandizip/history/",
+    "regex": "v([\\d.]+)</"
+  },
+  "autoupdate": {
+    "url": "https://bandisoft.app/bandizip/BANDIZIP-PORTABLE.ZIP"
+  }
 }
