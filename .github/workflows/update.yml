@@ -23,16 +23,28 @@
           run: |
             APP="${{ github.event.inputs.app }}"
             VERSION="${{ github.event.inputs.version }}"
-            MANIFEST="bucket/${APP}.json"
+            mapfile -t MATCHES < <(find bucket -type f -name "${APP}.json" | sort)
 
-            if [ ! -f "$MANIFEST" ]; then
-              echo "❌ Manifest not found: $MANIFEST"
+            if [ "${#MATCHES[@]}" -eq 0 ]; then
+              echo "❌ 未找到清单: ${APP}.json"
+              echo "当前 bucket 中可用的清单:"
+              find bucket -type f -name '*.json' -printf ' - %P\n' | sort
               exit 1
             fi
 
-            jq --arg v "$VERSION" '.version = $v' "$MANIFEST" > tmp.json
-            mv tmp.json "$MANIFEST"
-            echo "✅ Updated $APP to v$VERSION"
+            if [ "${#MATCHES[@]}" -gt 1 ]; then
+              echo "❌ 找到多个同名清单，请先消除歧义:"
+              printf ' - %s\n' "${MATCHES[@]}"
+              exit 1
+            fi
+
+            MANIFEST="${MATCHES[0]}"
+            TMP_FILE="$(mktemp)"
+
+            jq --arg v "$VERSION" '.version = $v' "$MANIFEST" > "$TMP_FILE"
+            mv "$TMP_FILE" "$MANIFEST"
+            echo "✅ 已更新 $APP 到 v$VERSION"
+            echo "目标清单: $MANIFEST"
             cat "$MANIFEST"
 
         - name: Commit and push
