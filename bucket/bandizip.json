@@ -1,6 +1,6 @@
 {
-  "version": "7.40",
-  "description": "Bandizip custom packaged release hosted by boxi-wangji",
+  "version": "8",
+  "description": "Bandizip custom portable release hosted by boxi-wangji",
   "homepage": "https://github.com/boxi-wangji/apps",
   "license": {
     "identifier": "Commercial",
@@ -8,30 +8,36 @@
   },
   "architecture": {
     "64bit": {
-      "url": "https://github.com/boxi-wangji/apps/releases/download/bandizip-v7.40/Bandizip-7.40-win64.zip",
-      "hash": "f36aba19147d0fc2162bfd67e13ae9c1faed7a10bc9fb830e00b6909ee8f35d7"
+      "url": "https://github.com/boxi-wangji/apps/releases/download/bandizip-v8/bandizip-8.7z",
+      "hash": "ba8af6f1a90f132aa1fc8675b964a7f580548c24c1f8efe4ff8817d5b0e091f2"
     }
   },
-  "bin": "Bandizip.exe",
+  "extract_dir": "Bandizip",
+  "bin": "Bandizip.x64.exe",
   "shortcuts": [
     [
-      "Bandizip.exe",
+      "Bandizip.x64.exe",
       "Bandizip"
     ]
   ],
-  "persist": "Bandizip.ini",
+  "post_install": [
+    "Remove-Item \"$dir\\423Down.url\" -Force -ErrorAction SilentlyContinue",
+    "Remove-Item \"$dir\\data\\coupang.exe\" -Force -ErrorAction SilentlyContinue"
+  ],
+  "persist": "config.ini",
   "notes": [
     "这是 boxi-wangji 维护的自定义打包版本，统一由 apps 仓库分发。",
+    "安装后会移除包内自带的 423Down.url 和 coupang.exe。",
     "安装后如需 Professional 权限，请使用你自己的授权完成注册。"
   ],
   "checkver": {
     "url": "https://github.com/boxi-wangji/apps/releases",
-    "regex": "bandizip-v([\\d.]+)"
+    "regex": "bandizip-v([\\w.-]+)"
   },
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://github.com/boxi-wangji/apps/releases/download/bandizip-v$version/Bandizip-$version-win64.zip"
+        "url": "https://github.com/boxi-wangji/apps/releases/download/bandizip-v$version/bandizip-$version.7z"
       }
     }
   }
