@@ -1,0 +1,19 @@
+{
+  "version": "8.0",
+  "url": "https://github.com/boxi-wangji/Bandizip-Package/releases/download/v8.0/bandizip-8.0.7z",
+  "hash": "ba8af6f1a90f132aa1fc8675b964a7f580548c24c1f8efe4ff8817d5b0e091f2",
+  "license": "MIT",
+  "bin": "Bandizip.exe",
+  "shortcuts": [
+    [
+      "Bandizip.exe",
+      "bandizip"
+    ]
+  ],
+  "checkver": {
+    "github": "https://github.com/boxi-wangji/Bandizip-Package"
+  },
+  "autoupdate": {
+    "url": "https://github.com/boxi-wangji/Bandizip-Package/releases/download/v$version/bandizip-$version.7z"
+  }
+}
