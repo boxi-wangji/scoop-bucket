@@ -22,12 +22,18 @@
   ],
   "post_install": [
     "Remove-Item \"$dir\\423Down.url\" -Force -ErrorAction SilentlyContinue",
-    "Remove-Item \"$dir\\data\\coupang.exe\" -Force -ErrorAction SilentlyContinue"
+    "Remove-Item \"$dir\\data\\coupang.exe\" -Force -ErrorAction SilentlyContinue",
+    "$configKey = 'HKCU:\\Software\\Bandizip'; New-Item -Path $configKey -Force | Out-Null; $configValues = @{ language = 'SimpChinese'; updateChk = 0; updateBeta = 0; shellOpenOpr = 1; shellOpenOprTargetPath = [Environment]::GetFolderPath('MyDocuments') + '\\\\'; shellOpenDelArchiveAfterExtract = 1; shell_ExtractHere = 0; shell_ExtractAuto = 1; shell_ExtractSub = 0; shell_ExtractHere_Del = 0; shell_ExtractAuto_Del = 1; shell_ExtractSub_Del = 0; shell_ExtractDlg = 1; shell_ExtractAsAdmin = 0; shell_OpenArchive = 1; shell_Archiving7z = 1; shell_ArchivingPopup = 1; openFolderWhenComplete = 1; doNotCloseExtractDlg = 1; compressionLevel = 6; comp__7zEncFileName = 1; useParallelExtraction = 0; bShowPreview = 1; bViewTreeControl = 1; bShowStatusBar = 1; darkModeOption = 0; extOfExtractAll = '*.exe; *.msi; *.htm; *.html;'; userArchiveExt = '*.cbr;*.cbz;*.ear' }; foreach ($entry in $configValues.GetEnumerator()) { $name = $entry.Key -replace '^comp__7zEncFileName$', 'comp._7zEncFileName'; if ($entry.Value -is [int]) { New-ItemProperty -Path $configKey -Name $name -PropertyType DWord -Value $entry.Value -Force | Out-Null } else { New-ItemProperty -Path $configKey -Name $name -PropertyType String -Value $entry.Value -Force | Out-Null } }",
+    "$classesRoot = 'HKCU:\\Software\\Classes'; $progId = 'Boxi.Bandizip.Archive'; $progIdPath = \"$classesRoot\\\\$progId\"; New-Item -Path $progIdPath -Force | Out-Null; New-Item -Path \"$progIdPath\\\\DefaultIcon\" -Force | Out-Null; New-Item -Path \"$progIdPath\\\\shell\\\\open\\\\command\" -Force | Out-Null; (Get-Item $progIdPath).SetValue('', 'Bandizip Archive'); (Get-Item $progIdPath).SetValue('FriendlyTypeName', 'Bandizip Archive'); (Get-Item \"$progIdPath\\\\DefaultIcon\").SetValue('', \"$dir\\\\Bandizip.x64.exe,0\"); (Get-Item \"$progIdPath\\\\shell\\\\open\\\\command\").SetValue('', ('\"' + $dir + '\\\\Bandizip.x64.exe\" \"%1\"')); foreach ($ext in '.zip', '.7z', '.rar', '.tar', '.tgz', '.gz', '.bz2', '.xz', '.cab', '.iso', '.jar', '.apk', '.alz', '.lzh', '.zst') { $extPath = \"$classesRoot\\\\$ext\"; New-Item -Path $extPath -Force | Out-Null; (Get-Item $extPath).SetValue('', $progId) }"
+  ],
+  "pre_uninstall": [
+    "$classesRoot = 'HKCU:\\Software\\Classes'; $progId = 'Boxi.Bandizip.Archive'; foreach ($ext in '.zip', '.7z', '.rar', '.tar', '.tgz', '.gz', '.bz2', '.xz', '.cab', '.iso', '.jar', '.apk', '.alz', '.lzh', '.zst') { $extPath = \"$classesRoot\\\\$ext\"; if (Test-Path $extPath) { $extKey = Get-Item $extPath; if ($extKey.GetValue('') -eq $progId) { $extKey.DeleteValue('', $false) } } }; Remove-Item \"$classesRoot\\\\$progId\" -Recurse -Force -ErrorAction SilentlyContinue"
   ],
   "persist": "config.ini",
   "notes": [
     "这是 boxi-wangji 维护的自定义打包版本，统一由 apps 仓库分发。",
     "安装后会移除包内自带的 423Down.url 和 coupang.exe。",
+    "安装后会写入一组 Bandizip 默认配置，并把常见压缩包扩展名关联到 Bandizip。",
     "安装后如需 Professional 权限，请使用你自己的授权完成注册。"
   ],
   "checkver": {
